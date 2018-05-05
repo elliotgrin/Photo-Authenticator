@@ -19,6 +19,10 @@ import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
+import com.crashlytics.android.Crashlytics
+import io.fabric.sdk.android.Fabric
+
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -35,6 +39,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var photoUri: Uri
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Fabric.with(this, Crashlytics())
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         ButterKnife.bind(this)
