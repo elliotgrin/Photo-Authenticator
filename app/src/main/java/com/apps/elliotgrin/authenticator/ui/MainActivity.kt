@@ -13,7 +13,7 @@ import android.widget.Toast
 import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
-import com.apps.elliotgrin.authenticator.FileUtils
+import com.apps.elliotgrin.authenticator.utils.FileUtils
 import com.apps.elliotgrin.authenticator.R
 import java.io.File
 import java.io.IOException
@@ -84,7 +84,7 @@ class MainActivity : AppCompatActivity() {
         if (requestCode == REQUEST_TAKE_PHOTO && resultCode == Activity.RESULT_OK) {
             imageView.setImageURI(photoUri)
 
-            Toast.makeText(this, FileUtils.getBytesFromFile(mCurrentPhotoPath).toString(), Toast.LENGTH_SHORT)
+            Toast.makeText(this, FileUtils.getChecksumFromFile(mCurrentPhotoPath).toString(), Toast.LENGTH_SHORT)
                     .show()
         }
     }
