@@ -11,6 +11,7 @@ import android.support.v4.content.FileProvider
 import android.widget.Toast
 import com.apps.elliotgrin.authenticator.utils.FileUtils
 import com.apps.elliotgrin.authenticator.R
+import com.apps.elliotgrin.authenticator.ssdeep.Ssdeep
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -38,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         takePictureButton.setOnClickListener { dispatchTakePictureIntent() }
     }
 
-    fun dispatchTakePictureIntent() {
+    private fun dispatchTakePictureIntent() {
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Ensure that there's a camera activity to handle the intent
         if (takePictureIntent.resolveActivity(packageManager) != null) {
@@ -81,9 +82,20 @@ class MainActivity : AppCompatActivity() {
         if (requestCode == REQUEST_TAKE_PHOTO && resultCode == Activity.RESULT_OK) {
             imageView.setImageURI(photoUri)
 
-            Toast.makeText(this, FileUtils.getChecksumFromFile(mCurrentPhotoPath).toString(), Toast.LENGTH_SHORT)
-                    .show()
+            getHashFronFile()
         }
+    }
+
+    private fun getHashFronFile() {
+        val ssdeep = Ssdeep()
+        val fuzzyHash = ssdeep.fuzzy_hash_file(mCurrentPhotoPath)
+        Toast.makeText(this, fuzzyHash, Toast.LENGTH_LONG)
+                .show()
+    }
+
+    override fun onBackPressed() {
+        if (imageView.height != 0) imageView.setImageDrawable(null)
+        else super.onBackPressed()
     }
 
 }
