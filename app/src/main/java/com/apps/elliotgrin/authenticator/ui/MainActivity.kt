@@ -8,11 +8,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Environment
 import android.support.v4.content.FileProvider
-import android.widget.ImageView
 import android.widget.Toast
-import butterknife.BindView
-import butterknife.ButterKnife
-import butterknife.OnClick
 import com.apps.elliotgrin.authenticator.utils.FileUtils
 import com.apps.elliotgrin.authenticator.R
 import java.io.File
@@ -21,8 +17,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import com.crashlytics.android.Crashlytics
 import io.fabric.sdk.android.Fabric
-
-
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -33,20 +28,17 @@ class MainActivity : AppCompatActivity() {
         const val REQUEST_TAKE_PHOTO = 1
     }
 
-    @BindView(R.id.imageView)
-    lateinit var imageView: ImageView
-
     lateinit var photoUri: Uri
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Fabric.with(this, Crashlytics())
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        ButterKnife.bind(this)
+
+        takePictureButton
     }
 
-    @OnClick(R.id.take_a_picture_button)
-    internal fun dispatchTakePictureIntent() {
+    fun dispatchTakePictureIntent() {
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Ensure that there's a camera activity to handle the intent
         if (takePictureIntent.resolveActivity(packageManager) != null) {
