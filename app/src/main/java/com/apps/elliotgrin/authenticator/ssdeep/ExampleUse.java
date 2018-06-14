@@ -24,7 +24,7 @@ import android.app.Activity;
  * 
  */
 
-public class MainActivity extends Activity {
+public class ExampleUse extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
