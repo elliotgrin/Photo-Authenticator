@@ -9,7 +9,6 @@ import android.net.Uri
 import android.os.Environment
 import android.support.v4.content.FileProvider
 import android.widget.Toast
-import com.apps.elliotgrin.authenticator.utils.FileUtils
 import com.apps.elliotgrin.authenticator.R
 import com.apps.elliotgrin.authenticator.ssdeep.Ssdeep
 import java.io.File
@@ -82,13 +81,13 @@ class MainActivity : AppCompatActivity() {
         if (requestCode == REQUEST_TAKE_PHOTO && resultCode == Activity.RESULT_OK) {
             imageView.setImageURI(photoUri)
 
-            getHashFronFile()
+            getHashFromFile()
         }
     }
 
-    private fun getHashFronFile() {
+    private fun getHashFromFile() {
         val ssdeep = Ssdeep()
-        val fuzzyHash = ssdeep.fuzzy_hash_file(mCurrentPhotoPath)
+        val fuzzyHash = ssdeep.getFuzzyHashFromFile(mCurrentPhotoPath)
         Toast.makeText(this, fuzzyHash, Toast.LENGTH_LONG)
                 .show()
     }

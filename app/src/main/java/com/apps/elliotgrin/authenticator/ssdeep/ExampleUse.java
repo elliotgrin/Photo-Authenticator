@@ -3,8 +3,6 @@ package com.apps.elliotgrin.authenticator.ssdeep;
 import java.io.File;
 import android.os.Bundle;
 import android.os.Environment;
-import android.util.Log;
-import android.widget.TextView;
 import android.app.Activity;
 
 /*
@@ -41,17 +39,17 @@ public class ExampleUse extends Activity {
         {
 	        File file = new File( Environment.getExternalStorageDirectory() + "avlscan.log");
 	        Ssdeep testSsdeepGenerate = new Ssdeep();
-	        signature1 = testSsdeepGenerate.fuzzy_hash_file(file);
+	        signature1 = testSsdeepGenerate.getFuzzyHashFromFile(file);
 			log.append("\r\n").append(signature1);
 			
 	        file = new File(Environment.getExternalStorageDirectory() + "iGO2.apk");
 	        testSsdeepGenerate = new Ssdeep();
-	        signature2 = testSsdeepGenerate.fuzzy_hash_file(file);
+	        signature2 = testSsdeepGenerate.getFuzzyHashFromFile(file);
 			log.append("\r\n").append(signature2);
 			
 	        file = new File(Environment.getExternalStorageDirectory() + "iGO1.apk");
 	        testSsdeepGenerate = new Ssdeep();
-	        signature3 = testSsdeepGenerate.fuzzy_hash_file(file);
+	        signature3 = testSsdeepGenerate.getFuzzyHashFromFile(file);
 			log.append("\r\n").append(signature3);
 			
         }
@@ -84,7 +82,7 @@ public class ExampleUse extends Activity {
 	    	String signature;
 	    	for (File childFile : dir.listFiles()) {
 	  	        testSsdeepGenerate = new Ssdeep();
-	  	        signature = testSsdeepGenerate.fuzzy_hash_file(childFile);
+	  	        signature = testSsdeepGenerate.getFuzzyHashFromFile(childFile);
 	  	        log.append("\r\n").append(childFile.getName() + " ssdeep: " + signature);
 	    	  }
     	}
